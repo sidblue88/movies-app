@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+       - echo Logging / auth in to Amazon ECR
+       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 126511412377.dkr.ecr.us-east-1.amazonaws.com 
+
+  build:
+    commands:
+      - echo Build started
+      - echo Building the docker image
+      - docker-compose build
+      - docker tag docker.io/library/src-vote:latest 126511412377.dkr.ecr.us-east-1.amazonaws.com/server:latest
+      - docker tag docker.io/library/src-result:latest 126511412377.dkr.ecr.us-east-1.amazonaws.com/client:latest
+
+  post_build:
+    commands:
+     - echo build completed
+     - echo pushing in to docker ECR...server service
+     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/server:latest
+     - echo pushing in to docker ECR...client service
+     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/client:latest
+     - echo Writing image definition file..
+     - printf '[{"name":"%s","imageUri":"%s"}]' "server" "126511412377.dkr.ecr.us-east-1.amazonaws.com/server" > imagedefinitions.json
+     - printf '[{"name":"%s","imageUri":"%s"}]' "client" "126511412377.dkr.ecr.us-east-1.amazonaws.com/client" > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+    
