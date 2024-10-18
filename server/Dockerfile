@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:14
+FROM public.ecr.aws/c9y0a3x2/node14:latest
 
 # Set the working directory
 WORKDIR /usr/src/app
