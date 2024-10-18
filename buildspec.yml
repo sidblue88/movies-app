@@ -18,7 +18,7 @@ phases:
     commands:
      - echo build completed
      - echo pushing in to docker ECR...server service
-     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/server:latest
+     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver:latest
      - echo pushing in to docker ECR...client service
      - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
      - echo Writing image definition file..
