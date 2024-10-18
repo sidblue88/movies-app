@@ -20,7 +20,7 @@ phases:
      - echo pushing in to docker ECR...server service
      - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/server:latest
      - echo pushing in to docker ECR...client service
-     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/client:latest
+     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
      - echo Writing image definition file..
      - printf '[{"name":"%s","imageUri":"%s"}]' "myserver" "126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver" > imagedefinitions.json
      - printf '[{"name":"%s","imageUri":"%s"}]' "myapp" "126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp" > imagedefinitions.json
