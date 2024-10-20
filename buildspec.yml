@@ -10,7 +10,7 @@ phases:
     commands:
       - echo Build started
       - echo Building the docker image
-      - docker-compose build
+      - docker-compose up --build
       - docker tag docker.io/library/myserver:1.0 126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver:latest
       - docker tag docker.io/library/myapp:1.0 126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
       - docker tag docker.io/library/mongo:4.0.4 126511412377.dkr.ecr.us-east-1.amazonaws.com/mongo:latest
