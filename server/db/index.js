@@ -1,10 +1,17 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 mongoose
-    .connect('mongodb://127.0.0.1:27017/cinema', { useNewUrlParser: true })
-    .catch(e => {
-        console.error('Connection error', e.message)
+    .connect('mongodb://localhost:27017/movies-app', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Successfully connected to MongoDB');
+        return mongoose.connection.db.admin().ping();
     })
+    .then((pingResult) => {
+        console.log('Ping result:', pingResult);
+    })
+    .catch((error) => {
+        console.error('Connection error', error.message);
+    });
 
 const db = mongoose.connection
 

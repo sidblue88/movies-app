@@ -13,6 +13,7 @@ phases:
       - docker-compose build
       - docker tag docker.io/library/myserver:1.0 126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver:latest
       - docker tag docker.io/library/myapp:1.0 126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+      - docker tag docker.io/library/mongo:4.0.4 126511412377.dkr.ecr.us-east-1.amazonaws.com/mongo:latest
 
   post_build:
     commands:
@@ -21,9 +22,12 @@ phases:
      - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver:latest
      - echo pushing in to docker ECR...client service
      - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp:latest
+     - echo pushing in to docker ECR...mongo service
+     - docker push 126511412377.dkr.ecr.us-east-1.amazonaws.com/mongo:latest
      - echo Writing image definition file..
      - printf '[{"name":"%s","imageUri":"%s"}]' "myserver" "126511412377.dkr.ecr.us-east-1.amazonaws.com/myserver" > imagedefinitions.json
      - printf '[{"name":"%s","imageUri":"%s"}]' "myapp" "126511412377.dkr.ecr.us-east-1.amazonaws.com/myapp" > imagedefinitions.json
+     - printf '[{"name":"%s","imageUri":"%s"}]' "mongo" "126511412377.dkr.ecr.us-east-1.amazonaws.com/mongo" > imagedefinitions.json
 
 artifacts:
   files:
