@@ -10,6 +10,7 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install
 
+
 # Copy the public directory and src directory
 COPY public ./public
 COPY src ./src
